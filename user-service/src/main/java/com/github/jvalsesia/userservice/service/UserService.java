@@ -28,9 +28,14 @@ public class UserService {
     public UserResponseDto addUser(UserRequestDto userRequestDto) {
         Mapper mapper = new Mapper();
         User user = mapper.toUser(userRequestDto);
-        User userSaved = userRepository.save(user);
-        UserResponseDto userResponse = mapper.toUserResponse(userSaved);
-        return userResponse;
+        if (user != null) {
+            User userSaved = userRepository.save(user);
+            UserResponseDto userResponse = mapper.toUserResponse(userSaved);
+            return userResponse;
+        } else {
+            return null;
+        }
+
     }
 
 }
